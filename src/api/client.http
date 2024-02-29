@@ -1,0 +1,58 @@
+###GET ALL DATA
+GET http://localhost:1234/movies HTTP/1.1
+
+###GET MOVIES BY GENRE
+
+GET http://localhost:1234/movies/genre/ACTION HTTP/1.1
+
+###GET MOVIE BY ID
+
+GET http://localhost:1234/movies/1 HTTP/1.1
+
+### CREATE NEW MOVIE
+
+POST http://localhost:1234/movies HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Inception",
+  "director": "Christopher Nolan",
+  "releaseYear": 2010,
+  "genres": ["Action", "Adventure", "Sci-Fi"],
+  "criticScore": 88,
+  "description": "A thief who enters the dreams of others to steal their secrets faces a new challenge: planting an idea into someone's mind."
+}
+
+###INVALID GET / CATCHED BY SCHEMA
+POST http://localhost:1234/movies HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Inception",
+  "director": "Christopher Nolan",
+  "releaseYear": 2010,
+  "genres": ["Action", "Adventure", "Sci-Fi"],
+  "criticScore": "sdfsdfsdf",
+  "description": "A thief who enters the dreams of others to steal their secrets faces a new challenge: planting an idea into someone's mind."
+}
+
+###UPDATE A MOVIE
+
+PATCH http://localhost:1234/movies/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "releaseYear": 2022
+}
+
+###FAILED UPDATE / CATCHED BY SCHEMA
+
+PATCH http://localhost:1234/movies/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "releaseYear": "2021"
+}
+
+###DELETE MOVIE BY ID
+DELETE http://localhost:1234/movies/b6b10a91-8d2e-4f2d-b727-e7e207763ac9 HTTP/1.1
